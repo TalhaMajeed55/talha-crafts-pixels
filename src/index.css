@@ -8,33 +8,54 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Portfolio theme colors */
+    --background: 0 0% 98%;
+    --foreground: 215 25% 27%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 27%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 27%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 158 64% 52%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 215 25% 27%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 158 64% 52%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 158 64% 52%;
+
+    /* Portfolio specific colors */
+    --emerald: 158 64% 52%;
+    --charcoal: 215 25% 27%;
+    --soft-white: 0 0% 98%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(158 64% 52% / 0.1), hsl(158 64% 65% / 0.15), hsl(158 64% 45% / 0.1));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100% / 0.7), hsl(0 0% 100% / 0.3));
+    --gradient-border: linear-gradient(135deg, hsl(158 64% 52% / 0.2), transparent);
+    
+    /* Shadows */
+    --shadow-card: 0 4px 20px hsl(158 64% 52% / 0.1);
+    --shadow-hover: 0 8px 30px hsl(158 64% 52% / 0.15);
+    --shadow-glow: 0 0 40px hsl(158 64% 52% / 0.3);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --duration-slow: 0.8s;
 
     --radius: 0.5rem;
 
@@ -101,5 +122,122 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: var(--gradient-hero);
+    animation: gradient-shift 20s ease-in-out infinite;
+  }
+  
+  .card-glass {
+    background: var(--gradient-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+  
+  .card-glass:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px) scale(1.02);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--emerald)), hsl(158 64% 45%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold;
+    transition: var(--transition-spring);
+    box-shadow: var(--shadow-card);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .stagger-child {
+    transition-delay: calc(var(--stagger-delay, 0) * 100ms);
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-gradient-shift {
+    animation: gradient-shift 20s ease-in-out infinite;
+  }
+  
+  .animate-draw-in {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw-in 2s ease-out forwards;
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background: linear-gradient(135deg, hsl(158 64% 52% / 0.1), hsl(158 64% 65% / 0.15), hsl(158 64% 45% / 0.1));
+  }
+  25% {
+    background: linear-gradient(135deg, hsl(158 64% 45% / 0.15), hsl(158 64% 52% / 0.1), hsl(158 64% 65% / 0.2));
+  }
+  50% {
+    background: linear-gradient(135deg, hsl(158 64% 65% / 0.2), hsl(158 64% 45% / 0.15), hsl(158 64% 52% / 0.1));
+  }
+  75% {
+    background: linear-gradient(135deg, hsl(158 64% 52% / 0.15), hsl(158 64% 65% / 0.1), hsl(158 64% 45% / 0.2));
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes draw-in {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotateZ(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px) rotateZ(720deg);
+    opacity: 0;
   }
 }
