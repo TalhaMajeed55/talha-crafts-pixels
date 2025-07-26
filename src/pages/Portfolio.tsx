@@ -5,6 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
+import { useEmailJS } from '@/hooks/use-emailjs';
 import { 
   Mail, 
   Copy, 
@@ -25,6 +26,16 @@ const Portfolio = () => {
   const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  
+  // EmailJS hook
+  const { sendEmail, isLoading, error, clearError } = useEmailJS();
 
   // Featured projects data
   const projects = [
@@ -164,16 +175,38 @@ const Portfolio = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Confetti effect
-    for (let i = 0; i < 50; i++) {
-      createConfetti();
+    
+    try {
+      // Send email using EmailJS
+      await sendEmail({
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: 'Talha Majeed'
+      });
+      
+      // Clear form
+      setFormData({ name: '', email: '', message: '' });
+      
+      // Confetti effect
+      for (let i = 0; i < 50; i++) {
+        createConfetti();
+      }
+      
+      toast({
+        title: "Message sent! 🎉",
+        description: "Thanks for reaching out. I'll get back to you soon!",
+      });
+    } catch (err) {
+      console.error('Email sending failed:', err);
+      toast({
+        title: "Failed to send message",
+        description: error || "Please try again later or contact me directly.",
+        variant: "destructive"
+      });
     }
-    toast({
-      title: "Message sent! 🎉",
-      description: "Thanks for reaching out. I'll get back to you soon!",
-    });
   };
 
   const createConfetti = () => {
@@ -185,6 +218,19 @@ const Portfolio = () => {
     confetti.style.animation = 'confetti 3s ease-out forwards';
     document.body.appendChild(confetti);
     setTimeout(() => confetti.remove(), 3000);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear any previous errors when user starts typing
+    if (error) {
+      clearError();
+    }
   };
 
   return (
@@ -361,26 +407,48 @@ const Portfolio = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-4">
                   <Input 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     placeholder="Your Name" 
                     required
                     className="bg-background/50 border-primary/20 focus:border-primary"
                   />
                   <Input 
+                    name="email"
                     type="email" 
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="your.email@example.com" 
                     required
                     className="bg-background/50 border-primary/20 focus:border-primary"
                   />
                   <Textarea 
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     placeholder="Tell me about your project..."
                     rows={5}
                     required
                     className="bg-background/50 border-primary/20 focus:border-primary resize-none"
                   />
                 </div>
-                <Button type="submit" className="w-full btn-primary group">
-                  <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
-                  Send Message
+                <Button 
+                  type="submit" 
+                  disabled={isLoading}
+                  className="w-full btn-primary group"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
               </form>
               <div className="mt-8 pt-6 border-t border-border text-center">
