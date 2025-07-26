@@ -1,73 +1,111 @@
-# Welcome to your Lovable project
+# Talha Majeed - Portfolio
 
-## Project info
+A modern, responsive portfolio website showcasing AI-powered experiences and full-stack development projects.
 
-**URL**: https://lovable.dev/projects/b993d37f-ef34-44e8-84dc-eb59a34e9531
+## 🚀 Live Demo
 
-## How can I edit this code?
+Visit the live portfolio: [https://yourusername.github.io/talha-crafts-pixels](https://yourusername.github.io/talha-crafts-pixels)
 
-There are several ways of editing your application.
+## ✨ Features
 
-**Use Lovable**
+- **Modern Design**: Clean, professional portfolio with smooth animations
+- **Responsive**: Optimized for all devices and screen sizes
+- **Contact Form**: Integrated EmailJS for real email functionality
+- **Project Showcase**: Interactive project gallery with detailed modals
+- **Tech Stack Display**: Comprehensive technology showcase
+- **Performance Optimized**: Fast loading with Vite and optimized assets
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b993d37f-ef34-44e8-84dc-eb59a34e9531) and start prompting.
+## 🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS, shadcn/ui components
+- **Email**: EmailJS for contact form functionality
+- **Deployment**: GitHub Pages with GitHub Actions
 
-**Use your preferred IDE**
+## 🚀 Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js 18+ 
+- npm or yarn
 
-Follow these steps:
+### Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/talha-crafts-pixels.git
+cd talha-crafts-pixels
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies
+```bash
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start development server
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open [http://localhost:8080](http://localhost:8080) in your browser
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📧 Email Configuration
 
-**Use GitHub Codespaces**
+This portfolio uses EmailJS for contact form functionality. To set up:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+1. Create an account at [EmailJS.com](https://www.emailjs.com/)
+2. Configure your email service and template
+3. Update credentials in `src/lib/emailjs-config.ts`
 
-## What technologies are used for this project?
+See `EMAILJS_SETUP.md` for detailed setup instructions.
 
-This project is built with:
+## 🚀 Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This project is automatically deployed to GitHub Pages using GitHub Actions.
 
-## How can I deploy this project?
+### Manual Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/b993d37f-ef34-44e8-84dc-eb59a34e9531) and click on Share -> Publish.
+1. Build the project
+```bash
+npm run build
+```
 
-## Can I connect a custom domain to my Lovable project?
+2. The built files will be in the `dist` folder
 
-Yes, you can!
+### GitHub Pages Setup
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. Go to your repository settings
+2. Navigate to "Pages" section
+3. Set source to "GitHub Actions"
+4. Push to main branch to trigger automatic deployment
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 📁 Project Structure
+
+```
+src/
+├── components/     # Reusable UI components
+├── hooks/         # Custom React hooks
+├── lib/           # Utility functions and configs
+├── pages/         # Page components
+└── main.tsx       # App entry point
+```
+
+## 🎨 Customization
+
+- **Colors**: Update CSS variables in `src/index.css`
+- **Content**: Modify project data in `src/pages/Portfolio.tsx`
+- **Styling**: Customize Tailwind classes and component styles
+- **Email**: Configure EmailJS settings in `src/lib/emailjs-config.ts`
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contact
+
+- **Email**: tmajeed55@gmail.com
+- **Portfolio**: [https://yourusername.github.io/talha-crafts-pixels](https://yourusername.github.io/talha-crafts-pixels)
+
+---
+
+Built with ❤️ using React, TypeScript, and Tailwind CSS
