@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -127,6 +128,10 @@ const Portfolio = () => {
   ];
 
   useEffect(() => {
+    // Initialize EmailJS
+    emailjs.init("YOUR_PUBLIC_KEY");
+
+    // Intersection Observer for animations
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -164,16 +169,35 @@ const Portfolio = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Confetti effect
-    for (let i = 0; i < 50; i++) {
-      createConfetti();
+    const form = e.target as HTMLFormElement;
+
+    try {
+      await emailjs.sendForm(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        form
+      );
+      
+      // Confetti effect
+      for (let i = 0; i < 50; i++) {
+        createConfetti();
+      }
+      
+      toast({
+        title: "Message sent! 🎉",
+        description: "Thanks for reaching out. I'll get back to you soon!",
+      });
+      
+      form.reset();
+    } catch (error) {
+      toast({
+        title: "Oops! Something went wrong",
+        description: "Please try again or email me directly.",
+        variant: "destructive"
+      });
     }
-    toast({
-      title: "Message sent! 🎉",
-      description: "Thanks for reaching out. I'll get back to you soon!",
-    });
   };
 
   const createConfetti = () => {
@@ -190,33 +214,32 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center hero-gradient">
-        <div className="absolute inset-0 hero-gradient animate-gradient-shift" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient leading-tight">
-            Hi, I'm <span className="text-charcoal">Talha Majeed</span> — I craft AI-powered experiences.
+      <section className="relative min-h-screen flex items-center justify-center liquid-wave">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center animate-mask-reveal">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-off-white leading-tight">
+            Hi, I'm <span className="text-gradient">Talha Majeed</span> — I craft AI-powered experiences.
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-off-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
             Turning ambitious ideas into pixel-perfect products.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-8">
             <a 
               href="mailto:tmajeed55@gmail.com"
-              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-lg group transition-colors"
+              className="inline-flex items-center gap-2 text-off-white hover:text-primary-light font-semibold text-lg group transition-colors"
             >
               <Mail className="w-5 h-5" />
               tmajeed55@gmail.com
-              <span className="block h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+              <span className="block h-0.5 bg-primary-light scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
             </a>
             <button
               onClick={handleEmailCopy}
-              className="p-2 hover:bg-primary/10 rounded-lg transition-colors"
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors text-off-white"
               title="Copy email"
             >
               <Copy className="w-4 h-4" />
             </button>
           </div>
-          <Button onClick={scrollToContact} className="btn-primary">
+          <Button onClick={scrollToContact} className="btn-primary text-off-white">
             Let's talk
           </Button>
         </div>
@@ -226,12 +249,12 @@ const Portfolio = () => {
       <section 
         id="about" 
         data-animate
-        className={`py-20 px-6 transition-all duration-1000 ${isVisible.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        className={`py-20 px-6 transition-all duration-1000 ${isVisible.about ? 'opacity-100 translate-y-0 animate-mask-reveal' : 'opacity-0 translate-y-10'}`}
       >
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-4xl font-bold text-charcoal">About Me</h2>
+              <h2 className="text-4xl font-bold text-charcoal dark:text-off-white">About Me</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 I'm a passionate full-stack developer and AI enthusiast with over 5 years of experience 
                 crafting digital solutions that make a difference. From building scalable web applications 
@@ -239,19 +262,19 @@ const Portfolio = () => {
                 elegant, user-friendly experiences.
               </p>
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-primary/5 rounded-lg">
+                <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
                   <h3 className="font-semibold text-primary">50+</h3>
                   <p className="text-sm text-muted-foreground">Projects Delivered</p>
                 </div>
-                <div className="p-4 bg-primary/5 rounded-lg">
+                <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
                   <h3 className="font-semibold text-primary">5+</h3>
                   <p className="text-sm text-muted-foreground">Years Experience</p>
                 </div>
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="w-64 h-64 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center animate-float">
-                <div className="w-48 h-48 bg-primary/10 rounded-full flex items-center justify-center">
+              <div className="w-64 h-64 bg-gradient-to-br from-primary/30 to-primary/10 rounded-full flex items-center justify-center animate-float border border-primary/20">
+                <div className="w-48 h-48 bg-primary/20 rounded-full flex items-center justify-center border border-primary/30">
                   <Code className="w-24 h-24 text-primary" />
                 </div>
               </div>
@@ -264,10 +287,10 @@ const Portfolio = () => {
       <section 
         id="projects" 
         data-animate
-        className={`py-20 px-6 bg-muted/30 transition-all duration-1000 ${isVisible.projects ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        className={`py-20 px-6 bg-muted/30 transition-all duration-1000 ${isVisible.projects ? 'opacity-100 translate-y-0 animate-mask-reveal' : 'opacity-0 translate-y-10'}`}
       >
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-charcoal mb-16">Featured Builds</h2>
+          <h2 className="text-4xl font-bold text-center text-charcoal dark:text-off-white mb-16">Featured Builds</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {projects.map((project, index) => (
               <Card 
@@ -286,7 +309,7 @@ const Portfolio = () => {
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="font-semibold text-charcoal mb-2">{project.title}</h3>
+                    <h3 className="font-semibold text-charcoal dark:text-off-white mb-2">{project.title}</h3>
                     <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                       {project.description}
                     </p>
@@ -314,10 +337,10 @@ const Portfolio = () => {
       <section 
         id="tech" 
         data-animate
-        className={`py-20 px-6 transition-all duration-1000 ${isVisible.tech ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        className={`py-20 px-6 transition-all duration-1000 ${isVisible.tech ? 'opacity-100 translate-y-0 animate-mask-reveal' : 'opacity-0 translate-y-10'}`}
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-charcoal mb-16">Tech Stack</h2>
+          <h2 className="text-4xl font-bold text-center text-charcoal dark:text-off-white mb-16">Tech Stack</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {techStacks.map((stack, index) => (
               <Card 
@@ -329,7 +352,7 @@ const Portfolio = () => {
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${stack.color} flex items-center justify-center text-white mb-4`}>
                     {stack.icon}
                   </div>
-                  <h3 className="font-semibold text-charcoal mb-4">{stack.category}</h3>
+                  <h3 className="font-semibold text-charcoal dark:text-off-white mb-4">{stack.category}</h3>
                   <div className="flex flex-wrap gap-2">
                     {stack.technologies.map((tech) => (
                       <Badge 
@@ -352,33 +375,36 @@ const Portfolio = () => {
       <section 
         id="contact" 
         data-animate
-        className={`py-20 px-6 bg-muted/30 transition-all duration-1000 ${isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        className={`py-20 px-6 bg-muted/30 transition-all duration-1000 ${isVisible.contact ? 'opacity-100 translate-y-0 animate-mask-reveal' : 'opacity-0 translate-y-10'}`}
       >
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-charcoal mb-16">Let's Work Together</h2>
+          <h2 className="text-4xl font-bold text-center text-charcoal dark:text-off-white mb-16">Let's Work Together</h2>
           <Card className="card-glass">
             <CardContent className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-4">
                   <Input 
+                    name="user_name"
                     placeholder="Your Name" 
                     required
                     className="bg-background/50 border-primary/20 focus:border-primary"
                   />
                   <Input 
+                    name="user_email"
                     type="email" 
                     placeholder="your.email@example.com" 
                     required
                     className="bg-background/50 border-primary/20 focus:border-primary"
                   />
                   <Textarea 
+                    name="message"
                     placeholder="Tell me about your project..."
                     rows={5}
                     required
                     className="bg-background/50 border-primary/20 focus:border-primary resize-none"
                   />
                 </div>
-                <Button type="submit" className="w-full btn-primary group">
+                <Button type="submit" className="w-full btn-primary group text-off-white">
                   <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
                   Send Message
                 </Button>
@@ -424,7 +450,7 @@ const Portfolio = () => {
                       />
                     </div>
                     <div className="p-8">
-                      <h3 className="text-2xl font-bold text-charcoal mb-4">{project.title}</h3>
+                      <h3 className="text-2xl font-bold text-charcoal dark:text-off-white mb-4">{project.title}</h3>
                       <p className="text-muted-foreground mb-6 leading-relaxed">
                         {project.description}
                       </p>
@@ -440,7 +466,7 @@ const Portfolio = () => {
                           <Github className="w-4 h-4 mr-2" />
                           View Code
                         </Button>
-                        <Button className="flex-1 btn-primary">
+                        <Button className="flex-1 btn-primary text-off-white">
                           <ExternalLink className="w-4 h-4 mr-2" />
                           Live Demo
                         </Button>
