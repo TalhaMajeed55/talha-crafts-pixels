@@ -14,21 +14,20 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center liquid-wave">
-      <div className="text-center px-6 animate-mask-reveal">
-        <div className="mb-8">
-          <h1 className="text-9xl font-bold text-off-white/30 mb-4">404</h1>
-          <h2 className="text-3xl md:text-4xl font-bold text-off-white mb-4">
-            Lost?
-          </h2>
-          <p className="text-lg text-off-white/80 max-w-md mx-auto">
-            Looks like you've wandered into uncharted waters. Let's get you back to familiar shores.
-          </p>
+    <div className="min-h-screen flex items-center justify-center hero-gradient">
+      <div className="absolute inset-0 hero-gradient animate-gradient-shift" />
+      <div className="relative z-10 text-center max-w-md mx-auto px-6">
+        <div className="mb-8 animate-float">
+          <Frown className="w-24 h-24 text-primary mx-auto mb-4" />
         </div>
-        
+        <h1 className="text-6xl font-bold mb-4 text-gradient">404</h1>
+        <h2 className="text-2xl font-semibold text-charcoal mb-4">Lost?</h2>
+        <p className="text-muted-foreground mb-8 leading-relaxed">
+          Looks like you've wandered into uncharted territory. Let's get you back on track!
+        </p>
         <Button 
           onClick={() => window.location.href = '/'}
-          className="btn-primary text-off-white"
+          className="btn-primary"
         >
           <Home className="w-4 h-4 mr-2" />
           Back Home
