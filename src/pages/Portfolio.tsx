@@ -43,56 +43,56 @@ const Portfolio = () => {
       id: 1,
       title: "Bolt Video Conferencing",
       description: "A modern video conferencing platform with real-time collaboration features, screen sharing, and AI-powered meeting insights.",
-      image: "/lovable-uploads/f8210fdd-d6c6-44cf-a715-494ed5c09cfe.png",
+      image: "/talha-crafts-pixels/lovable-uploads/f8210fdd-d6c6-44cf-a715-494ed5c09cfe.png",
       tech: ["React", "WebRTC", "Node.js", "Socket.io"]
     },
     {
       id: 2,
       title: "Health Tracker Dashboard",
       description: "Comprehensive health monitoring application with real-time vitals tracking, data visualization, and AI health insights.",
-      image: "/lovable-uploads/b6ec3a7c-2232-46a9-bb9a-ed72b20c9c50.png",
+      image: "/talha-crafts-pixels/lovable-uploads/b6ec3a7c-2232-46a9-bb9a-ed72b20c9c50.png",
       tech: ["React", "Chart.js", "FastAPI", "MongoDB"]
     },
     {
       id: 3,
       title: "Cars Scraping Platform",
       description: "Advanced car marketplace with intelligent search filters, price tracking, and automated data scraping capabilities.",
-      image: "/lovable-uploads/ef1c8a00-61a3-4593-a8af-c36939226c32.png",
+      image: "/talha-crafts-pixels/lovable-uploads/ef1c8a00-61a3-4593-a8af-c36939226c32.png",
       tech: ["React", "Python", "Scrapy", "PostgreSQL"]
     },
     {
       id: 4,
       title: "Expert Consultation Platform",
       description: "Professional networking platform connecting experts with clients for video consultations and advice.",
-      image: "/lovable-uploads/3372f381-3938-42cc-a2dc-8dcb886be877.png",
+      image: "/talha-crafts-pixels/lovable-uploads/3372f381-3938-42cc-a2dc-8dcb886be877.png",
       tech: ["React", "Next.js", "Stripe", "WebRTC"]
     },
     {
       id: 5,
       title: "Hostel Management System",
       description: "Complete hostel administration platform with billing, student management, and automated fee tracking.",
-      image: "/lovable-uploads/c1c2543b-9aea-4f3c-b4dd-1602d4ea0150.png",
+      image: "/talha-crafts-pixels/lovable-uploads/c1c2543b-9aea-4f3c-b4dd-1602d4ea0150.png",
       tech: ["React", "Node.js", "MySQL", "Express"]
     },
     {
       id: 6,
       title: "KrossGo Sports Platform",
       description: "Sports equipment e-commerce platform with custom product configurator and team management features.",
-      image: "/lovable-uploads/98e24c9b-c439-4ff3-ad7d-14da8a0fd295.png",
+      image: "/talha-crafts-pixels/lovable-uploads/98e24c9b-c439-4ff3-ad7d-14da8a0fd295.png",
       tech: ["React", "E-commerce", "PayPal", "AWS"]
     },
     {
       id: 7,
       title: "Metronic Meetings",
       description: "Enterprise meeting management system with calendar integration, recording capabilities, and team collaboration.",
-      image: "/lovable-uploads/ac096711-ba50-44de-86d8-880bdf2d2bdb.png",
+      image: "/talha-crafts-pixels/lovable-uploads/ac096711-ba50-44de-86d8-880bdf2d2bdb.png",
       tech: ["Angular", "TypeScript", "WebRTC", "Calendar API"]
     },
     {
       id: 8,
       title: "NeuroFlow Voting System",
       description: "Blockchain-based voting platform ensuring transparency, security, and real-time vote tracking with smart contracts.",
-      image: "/lovable-uploads/66971ad8-7866-4464-88ce-cbec662e1adb.png",
+      image: "/talha-crafts-pixels/lovable-uploads/66971ad8-7866-4464-88ce-cbec662e1adb.png",
       tech: ["React", "Solidity", "Web3.js", "Blockchain"]
     }
   ];
