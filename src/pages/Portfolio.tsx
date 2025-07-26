@@ -496,22 +496,12 @@ const Portfolio = () => {
                       <p className="text-muted-foreground mb-6 leading-relaxed">
                         {project.description}
                       </p>
-                      <div className="flex flex-wrap gap-2 mb-6">
+                      <div className="flex flex-wrap gap-2">
                         {project.tech.map((tech) => (
                           <Badge key={tech} variant="secondary">
                             {tech}
                           </Badge>
                         ))}
-                      </div>
-                      <div className="flex gap-4">
-                        <Button variant="outline" className="flex-1">
-                          <Github className="w-4 h-4 mr-2" />
-                          View Code
-                        </Button>
-                        <Button className="flex-1 btn-primary">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Demo
-                        </Button>
                       </div>
                     </div>
                   </>
